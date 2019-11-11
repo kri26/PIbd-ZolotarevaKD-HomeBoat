@@ -8,7 +8,7 @@ public class FormBoat {
 
     private JFrame frame;
 
-    Boat boat;
+    SportBoat sportBoat;
     JPanel panel;
 
     public static void main(String[] args) {
@@ -39,18 +39,28 @@ public class FormBoat {
         frame.getContentPane().add(panel);
         panel.setLayout(null);
 
-        JButton button_Create = new JButton("Создать");
+        JButton button_Create = new JButton("Создать катер");
         button_Create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ((PanelBoat) panel).renovate(panel.getSize().width, panel.getSize().height);
+                ((PanelBoat) panel).renovate(panel.getSize().width, panel.getSize().height, false);
+                panel.repaint();
+            }
+        });
+        button_Create.setBounds(10, 10, 111, 23);
+        panel.add(button_Create);
+        
+        JButton button_Create_SportBoat = new JButton("Создать спортивный катер");
+        button_Create_SportBoat.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ((PanelBoat) panel).renovate(panel.getSize().width, panel.getSize().height, true);
                 panel.repaint();
             }
         });
 
-        button_Create.setBounds(0, 0, 89, 23);
-        panel.add(button_Create);
+        button_Create_SportBoat.setBounds(131, 10, 159, 23);
+        panel.add(button_Create_SportBoat);
 
-        JButton btnNewButton_Up = new JButton("Up");
+        JButton btnNewButton_Up = new JButton("U");
         btnNewButton_Up.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 ((PanelBoat) panel).MoveTransport(Direction.Up);
@@ -60,7 +70,7 @@ public class FormBoat {
         btnNewButton_Up.setBounds(750, 350, 50, 50);
         panel.add(btnNewButton_Up);
 
-        JButton btnNewButton_Left = new JButton("Right");
+        JButton btnNewButton_Left = new JButton("R");
         btnNewButton_Left.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 ((PanelBoat) panel).MoveTransport(Direction.Left);
@@ -70,7 +80,7 @@ public class FormBoat {
         btnNewButton_Left.setBounds(700, 400, 50, 50);
         panel.add(btnNewButton_Left);
 
-        JButton btnNewButton_Down = new JButton("Down");
+        JButton btnNewButton_Down = new JButton("D");
         btnNewButton_Down.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 ((PanelBoat) panel).MoveTransport(Direction.Down);
@@ -80,7 +90,7 @@ public class FormBoat {
         btnNewButton_Down.setBounds(750, 400, 50, 50);
         panel.add(btnNewButton_Down);
 
-        JButton btnNewButton_Right = new JButton("Left");
+        JButton btnNewButton_Right = new JButton("L");
         btnNewButton_Right.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 ((PanelBoat) panel).MoveTransport(Direction.Right);
