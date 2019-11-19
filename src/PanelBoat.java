@@ -4,9 +4,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class PanelBoat extends JPanel {
-    public PanelBoat() {
-    }
-
     Boat boat;
 
     public void renovate(int width, int height) {
