@@ -4,11 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-public class DrawMotor implements IMotors {
-	
-	
-	NumderOfMotors directionMotor;
-	NumderOfMotors rand;
+public class DrawMotor {
+	DirectionMotor directionMotor;
+	DirectionMotor rand;
 	
 	public DrawMotor() {
 			rand = NumderOfMotors.getRandom();
@@ -34,5 +32,5 @@ public class DrawMotor implements IMotors {
                 g.fillOval(_startPosX, _startPosY + 45, 11, 10);
                 break;
         }
-		
-	}}
+    }
+}
