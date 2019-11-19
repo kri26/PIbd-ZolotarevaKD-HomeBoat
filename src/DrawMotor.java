@@ -5,8 +5,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class DrawMotor {
-	
-	
 	DirectionMotor directionMotor;
 	DirectionMotor rand;
 	
@@ -34,5 +32,4 @@ public class DrawMotor {
                 break;
         }
     }
-	
 }
