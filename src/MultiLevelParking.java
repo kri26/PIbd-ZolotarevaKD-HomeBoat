@@ -1,15 +1,16 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class MultiLevelParking {
 
-	ArrayList<Parking<ITransport, IMotors>> parkingStages;
+	Hashtable <Integer,Parking<ITransport, IMotors>> parkingStages;
 
 	private static final int countPlaces = 20;
 
 	public MultiLevelParking(int countStages, int pictureWidth, int pictureHeight) {
-		parkingStages = new ArrayList<Parking<ITransport, IMotors>>();
+		parkingStages = new Hashtable<Integer,Parking<ITransport, IMotors>>();
 		for (int i = 0; i < countStages; ++i) {
-			parkingStages.add(new Parking<ITransport, IMotors>(countPlaces, pictureWidth, pictureHeight));
+			parkingStages.put(i,new Parking<ITransport, IMotors>(countPlaces, pictureWidth, pictureHeight));
 		}
 	}
 
