@@ -1,28 +1,25 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Parking<T extends ITransport, M extends IMotors> {
-	private T[] _places;
-
+	HashMap<Integer, T> _places;
     private int PictureWidth;
     private int PictureHeight;
 
     private final int _placeSizeWidth = 210;
     private final int _placeSizeHeight = 80;
+    int _maxCount;
     
 	ArrayList list = new ArrayList();
 
     public Parking(int sizes, int pictureWidth, int pictureHeight)
     {
-        _places = (T[]) new ITransport[sizes];
+    	_places = new HashMap<Integer, T>(sizes);
+    	_maxCount = sizes;
         PictureWidth = pictureWidth;
         PictureHeight = pictureHeight;
-        
-
-        for (int i = 0; i < _places.length; i++) {
-            _places[i] = null;
-        }
     }
     
     public int getPictureWidth() {
@@ -43,125 +40,38 @@ public class Parking<T extends ITransport, M extends IMotors> {
 
     public int addBoat(T boat)
     {
-        for (int i = 0; i < _places.length; i++) {
+        for (int i = 0; i < _maxCount; i++) {
             if (CheckFreePlace(i)) {
-                _places[i] = boat;
-                int [] x = {5 + i / 5 * _placeSizeWidth + 5};
-                int [] y = {i % 5 * _placeSizeHeight + 15};
-                _places[i].SetPosition(x, y, 1,PictureWidth, PictureHeight);
+            	_places.put(i, boat);
+				_places.get(i).SetPosition(5 + i / 5 * _placeSizeWidth + 5, i % 5 * _placeSizeHeight + 15, PictureWidth, PictureHeight);
                 return i;
             }
         }
         return -1;
     }
     
-    public int addManyBoat(T boat)
-    {
-    	list.add(boat);
-    	list.add(boat);
-    	list.add(boat);
-    	list.add(boat);
-    	list.add(boat);
-    	int [] x = new int[list.size()];
-    	int [] y = new int[list.size()];
-        for (int i = 0; i < _places.length; i++) {
-            if (CheckFreePlace(i)) {
-            	for(int j = 0; j < list.size() && i < _places.length; j++) {
-	            	_places[i] = (T) list.get(j);
-	            	x[j] = (int)(5 + i / 5 * _placeSizeWidth + 5);
-	            	y[j] = (int)(i % 5 * _placeSizeHeight + 15);
-	            	_places[i].SetPosition(x, y, list.size(),PictureWidth, PictureHeight);
-	                i++;
-            	}
-	            list.remove(boat);
-	            list.remove(boat); 
-	            list.remove(boat); 
-	            list.remove(boat);  
-	            list.remove(boat); 
-            	return i;
-            }
-        }
-        list.remove(boat);
-        list.remove(boat); 
-        list.remove(boat); 
-        list.remove(boat); 
-        list.remove(boat); 
-        return -1;
-    }
-
-    public T deletManyBoat(int index)
-    {
-        if (index < 1 || index > 4) {
-            return null;
-        }
-        switch(index)
-        {
-        	case 1:
-        		 for(int j = 0; j < 5; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
-        		break;
-        	case 2:
-	            for(int j = 5; j < 10; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
-        		break;
-        	case 3:
-        		for(int j = 10; j < 15; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
-       		 	break;
-        	case 4:
-        		for(int j = 15; j < 20; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
-       		 break;
-        }
-        return null;
-    }
-    
     public T deletBoat(int index)
     {
-        if (index < 0 || index > _places.length) {
-            return null;
-        }
         if (!CheckFreePlace(index)) {
-            T boat = _places[index];
-            _places[index] = null;
+            T boat = _places.get(index);
+            _places.remove(index);
             return boat;
         }
-
         return null;
     }
     
 
     private boolean CheckFreePlace(int index)
     {
-        return _places[index] == null;
+        return !_places.containsKey(index);
     }
 
     public void Draw(Graphics g)
     {
         DrawMarking(g);
-        for (int i = 0; i < _places.length; i++) {
+        for (int i = 0; i < _maxCount; i++) {
             if (!CheckFreePlace(i)) {
-                _places[i].DrawBoat(g);
+                _places.get(i).DrawBoat(g);
             }
         }
     }
@@ -169,8 +79,8 @@ public class Parking<T extends ITransport, M extends IMotors> {
     private void DrawMarking(Graphics g)
     {
     	g.setColor(Color.black);
-        g.drawRect(0, 0, (_places.length / 5) * _placeSizeWidth, 480);
-        for (int i = 0; i < _places.length / 5; i++) {
+        g.drawRect(0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
+        for (int i = 0; i < _maxCount / 5; i++) {
             for (int j = 0; j < 6; j++){
                 g.drawLine(i * _placeSizeWidth, j * _placeSizeHeight,i * _placeSizeWidth + 110, j * _placeSizeHeight);
             }
