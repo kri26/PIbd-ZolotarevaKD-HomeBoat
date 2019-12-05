@@ -9,8 +9,8 @@ public class PanelTakeBoat extends JPanel {
 	
 	public void setTransport(ITransport t) {
 		transport = t;
-		int [] x = {1000};
-		int [] y = {1000};
+		int [] x = {15};
+		int [] y = {15};
 		transport.SetPosition(x, y, 1, 90, 50);
 	}
 	

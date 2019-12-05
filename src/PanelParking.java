@@ -11,10 +11,10 @@ public class PanelParking extends JPanel {
 	}
 	
 	public int addBoat(ITransport transport) {
-		return parking.addBoat(transport);
+		return parking.addManyBoat(transport);
 	}
 	
 	public ITransport delBoat(int index) {
-		return parking.deletBoat(index);
+		return parking.deletManyBoat(index);
 	}
 }

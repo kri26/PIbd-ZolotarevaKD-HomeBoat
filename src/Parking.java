@@ -97,40 +97,40 @@ public class Parking<T extends ITransport, M extends IMotors> {
         switch(index)
         {
         	case 1:
+       		 	if (!CheckFreePlace(0)) {
+     	         T boat = _places[0];
         		 for(int j = 0; j < 5; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
 	        	            	_places[j] = null;
-	        	            return boat;
 	        	        }
+	            return boat;
 	            }
         		break;
         	case 2:
-	            for(int j = 5; j < 10; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
+        		if (!CheckFreePlace(5)) {
+        	    T boat = _places[5];
+           		 for(int j = 5; j < 10; j++) {
+   	        	            	_places[j] = null;
+   	        	        }
+   	            return boat;
+   	            }
         		break;
         	case 3:
-        		for(int j = 10; j < 15; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
+        		if (!CheckFreePlace(10)) {
+        	    T boat = _places[10];
+           		 for(int j = 10; j < 15; j++) {
+   	        	            	_places[j] = null;
+   	        	        }
+   	            return boat;
+   	            }
        		 	break;
         	case 4:
-        		for(int j = 15; j < 20; j++) {
-	        		 if (!CheckFreePlace(j)) {
-	        	            T boat = _places[j];
-	        	            	_places[j] = null;
-	        	            return boat;
-	        	        }
-	            }
+        		if (!CheckFreePlace(15)) {
+        	         T boat = _places[15];
+           		 for(int j = 15; j < 20; j++) {
+   	        	            	_places[j] = null;
+   	        	        }
+   	            return boat;
+   	            }
        		 break;
         }
         return null;
