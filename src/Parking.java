@@ -1,7 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
-public class Parking<T extends ITransport> {
+public class Parking<T extends ITransport, M extends IMotors> {
 	private T[] _places;
 
     private int PictureWidth;
@@ -9,12 +10,15 @@ public class Parking<T extends ITransport> {
 
     private final int _placeSizeWidth = 210;
     private final int _placeSizeHeight = 80;
+    
+	ArrayList list = new ArrayList();
 
     public Parking(int sizes, int pictureWidth, int pictureHeight)
     {
         _places = (T[]) new ITransport[sizes];
         PictureWidth = pictureWidth;
         PictureHeight = pictureHeight;
+        
 
         for (int i = 0; i < _places.length; i++) {
             _places[i] = null;
@@ -42,13 +46,94 @@ public class Parking<T extends ITransport> {
         for (int i = 0; i < _places.length; i++) {
             if (CheckFreePlace(i)) {
                 _places[i] = boat;
-                _places[i].SetPosition(5 + i / 5 * _placeSizeWidth + 5, 
-                                       i % 5 * _placeSizeHeight + 15, 
-                                       PictureWidth, PictureHeight);
+                int [] x = {5 + i / 5 * _placeSizeWidth + 5};
+                int [] y = {i % 5 * _placeSizeHeight + 15};
+                _places[i].SetPosition(x, y, 1,PictureWidth, PictureHeight);
                 return i;
             }
         }
         return -1;
+    }
+    
+    public int addManyBoat(T boat)
+    {
+    	list.add(boat);
+    	list.add(boat);
+    	list.add(boat);
+    	list.add(boat);
+    	list.add(boat);
+    	int [] x = new int[list.size()];
+    	int [] y = new int[list.size()];
+        for (int i = 0; i < _places.length; i++) {
+            if (CheckFreePlace(i)) {
+            	for(int j = 0; j < list.size() && i < _places.length; j++) {
+	            	_places[i] = (T) list.get(j);
+	            	x[j] = (int)(5 + i / 5 * _placeSizeWidth + 5);
+	            	y[j] = (int)(i % 5 * _placeSizeHeight + 15);
+	            	_places[i].SetPosition(x, y, list.size(),PictureWidth, PictureHeight);
+	                i++;
+            	}
+	            list.remove(boat);
+	            list.remove(boat); 
+	            list.remove(boat); 
+	            list.remove(boat);  
+	            list.remove(boat); 
+            	return i;
+            }
+        }
+        list.remove(boat);
+        list.remove(boat); 
+        list.remove(boat); 
+        list.remove(boat); 
+        list.remove(boat); 
+        return -1;
+    }
+
+    public T deletManyBoat(int index)
+    {
+        if (index < 1 || index > 4) {
+            return null;
+        }
+        switch(index)
+        {
+        	case 1:
+        		 for(int j = 0; j < 5; j++) {
+	        		 if (!CheckFreePlace(j)) {
+	        	            T boat = _places[j];
+	        	            	_places[j] = null;
+	        	            return boat;
+	        	        }
+	            }
+        		break;
+        	case 2:
+	            for(int j = 5; j < 10; j++) {
+	        		 if (!CheckFreePlace(j)) {
+	        	            T boat = _places[j];
+	        	            	_places[j] = null;
+	        	            return boat;
+	        	        }
+	            }
+        		break;
+        	case 3:
+        		for(int j = 10; j < 15; j++) {
+	        		 if (!CheckFreePlace(j)) {
+	        	            T boat = _places[j];
+	        	            	_places[j] = null;
+	        	            return boat;
+	        	        }
+	            }
+       		 	break;
+        	case 4:
+        		for(int j = 15; j < 20; j++) {
+	        		 if (!CheckFreePlace(j)) {
+	        	            T boat = _places[j];
+	        	            	_places[j] = null;
+	        	            return boat;
+	        	        }
+	            }
+       		 break;
+        }
+        return null;
     }
     
     public T deletBoat(int index)
@@ -64,6 +149,7 @@ public class Parking<T extends ITransport> {
 
         return null;
     }
+    
 
     private boolean CheckFreePlace(int index)
     {

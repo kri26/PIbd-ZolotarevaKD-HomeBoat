@@ -59,7 +59,7 @@ public class ParkingForm {
 											  new Color((int)(Math.random() * 256), 
 													    (int)(Math.random() * 256), 
 													    (int)(Math.random() * 256)));
-				int position = panel.addBoat(boat);
+				panel.addBoat(boat);
 				panel.repaint();
 			}
 		});
@@ -77,7 +77,7 @@ public class ParkingForm {
 						  												 new Color((int)(Math.random() * 256), 
 						  														   (int)(Math.random() * 256), 
 						  														   (int)(Math.random() * 256)));
-				int position = panel.addBoat(sportBoat);
+				panel.addBoat(sportBoat);
 				panel.repaint();
 			}
 		});

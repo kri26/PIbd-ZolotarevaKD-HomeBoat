@@ -9,7 +9,6 @@ public class DrawMotors2Poit0 implements IMotors {
 	
 	public DrawMotors2Poit0() {
 			rand = NumderOfMotors.getRandom();
-		
 	}
 	
 	@Override
@@ -31,6 +30,5 @@ public class DrawMotors2Poit0 implements IMotors {
                 g.fillOval(_startPosX, _startPosY + 45, 10, 10);
                 break;
         }
-		
 	}
 }

@@ -12,7 +12,6 @@ public class DrawMotor implements IMotors {
 	
 	public DrawMotor() {
 			rand = NumderOfMotors.getRandom();
-		
 	}
 	
 	@Override
@@ -35,4 +34,5 @@ public class DrawMotor implements IMotors {
                 break;
         }
 		
-	}}
+	}
+}

@@ -3,8 +3,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class Boat implements ITransport {
-	private float _startPosX;
-    private float _startPosY;
+	private int _startPosX [] = new int[20];
+    private int _startPosY [] =  new int [20];
     private int _pictureWidth;
     private int _pictureHeight;
     private int planeWidth = 90;
@@ -21,50 +21,22 @@ public class Boat implements ITransport {
         MainColor = mainColor;
     }
 
-    public void SetPosition(int x, int y, int width, int height) {
-        _startPosX = x;
-        _startPosY = y;
+    public void SetPosition(int []x, int []y, int size, int width, int height) {
+    	_startPosX = new int [size];
+    	_startPosY = new int [size];
+    	System.arraycopy(x, 0, _startPosX, 0, x.length);
+    	System.arraycopy(y, 0, _startPosY, 0, x.length);
         _pictureWidth = width;
         _pictureHeight = height;
         drawMotor = new DrawMotor();
     }
-    
-    public void MoveTransport(Direction direction) {
-        float step = MaxSpeed * 100 / Weight;
-        switch (direction) {
-        		// вправо
-            case Right:
-                if (_startPosX + step < _pictureWidth - planeWidth - 85) {
-                    _startPosX += step;
-                }
-                break;
-                // влево
-            case Left:
-                if (_startPosX - step > 0) {
-                    _startPosX -= step;
-                }
-                break;
-                // вверх
-            case Up:
-                if (_startPosY - step > 3) {
-
-                    _startPosY -= step;
-                }
-                break;
-                // вниз
-            case Down:
-                if (_startPosY + step < _pictureHeight - planeHeight - 100) {
-                    _startPosY += step;
-                }
-                break;
-        }
-    }
 
     public void DrawBoat(Graphics g) {
-    	
-        Graphics2D g2 = (Graphics2D) g;
-        Ellipse2D oval = new Ellipse2D.Double(_startPosX, _startPosY + 30, 90, 20);
-        g2.setPaint(Color.BLUE);
-        g2.fill(oval);
+	    	  for(int j = 0; j < _startPosX.length; j++) {
+			        Graphics2D g2 = (Graphics2D) g;
+			        Ellipse2D oval = new Ellipse2D.Double(_startPosX[j], _startPosY[j] + 30, 90, 20);
+			        g2.setPaint(Color.BLUE);
+			        g2.fill(oval);
+	    	  }
         }
 }
