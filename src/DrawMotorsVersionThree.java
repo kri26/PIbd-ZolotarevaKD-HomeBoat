@@ -6,7 +6,7 @@ public class DrawMotorsVersionThree implements IMotors {
 	NumderOfMotors rand;
 	
 	public DrawMotorsVersionThree() {
-			rand = NumderOfMotors.getRandom();
+			rand = NumderOfMotors.getRandom();			
 	}
 	
 	@Override

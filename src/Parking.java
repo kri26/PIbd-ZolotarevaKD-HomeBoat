@@ -12,7 +12,7 @@ public class Parking<T extends ITransport, M extends IMotors> {
     private final int _placeSizeHeight = 80;
     int _maxCount;
     
-	ArrayList list = new ArrayList();
+    ArrayList list = new ArrayList();
 
     public Parking(int sizes, int pictureWidth, int pictureHeight)
     {
@@ -49,7 +49,7 @@ public class Parking<T extends ITransport, M extends IMotors> {
         }
         return -1;
     }
-
+  
     public T deletBoat(int index)
     {
         if (!CheckFreePlace(index)) {
@@ -60,7 +60,6 @@ public class Parking<T extends ITransport, M extends IMotors> {
         return null;
     }
     
-
     private boolean CheckFreePlace(int index)
     {
         return !_places.containsKey(index);

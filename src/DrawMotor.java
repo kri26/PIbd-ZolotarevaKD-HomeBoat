@@ -31,7 +31,6 @@ public class DrawMotor implements IMotors {
                 g.fillOval(_startPosX, _startPosY + 35, 11, 10);
                 g.fillOval(_startPosX, _startPosY + 45, 11, 10);
                 break;
-        }
-		
+        }	
 	}
 }

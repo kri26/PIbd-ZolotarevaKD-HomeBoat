@@ -10,6 +10,15 @@ public class Boat extends Vehicle {
     public int MaxSpeed;
     public float Weight;
     DrawMotor drawMotor;
+    
+    public ITransport Clone(){
+    	ITransport boat = new Boat((int)(Math.random() * 200) + 100, 
+				  (int)(Math.random() * 1000) + 1000, 
+				  new Color((int)(Math.random() * 256), 
+						    (int)(Math.random() * 256), 
+						    (int)(Math.random() * 256)));
+    	return boat;
+    }
 
     public Boat(int maxSpeed, float weight, Color mainColor) {
         MaxSpeed = maxSpeed;

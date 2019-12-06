@@ -106,8 +106,8 @@ public class ParkingForm {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = Integer.parseInt(takeTextField.getText());
 				ITransport transport = 	panel.delBoat(index);
-				takePanel.setTransport(transport);
 				panel.repaint();
+				takePanel.setTransport(transport);
 				takePanel.repaint();
 			}
 		});
