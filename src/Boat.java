@@ -16,6 +16,17 @@ public class Boat extends Vehicle {
         Weight = weight;
         MainColor = mainColor;
     }
+    
+    public Boat(String info)
+    {
+        String[] strs = info.split(";");
+        if (strs.length == 3)
+        {
+            MaxSpeed = Integer.parseInt(strs[0]);
+            Weight = Float.parseFloat(strs[1]);
+            MainColor = new Color(Integer.parseInt(strs[2]));
+        }
+    }
 
     public void DrawBoat(Graphics g) {
 			        Graphics2D g2 = (Graphics2D) g;
@@ -23,4 +34,10 @@ public class Boat extends Vehicle {
 			        g2.setPaint(MainColor);
 			        g2.fill(oval);
         }
+    
+    @Override
+	public String ToString()
+    {
+        return MaxSpeed + ";" + Weight + ";" + MainColor.getRGB();
+    }
 }

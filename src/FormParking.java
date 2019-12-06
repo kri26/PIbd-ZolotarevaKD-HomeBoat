@@ -5,12 +5,19 @@ import java.awt.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Hashtable;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FormParking {
 
@@ -58,12 +65,12 @@ public class FormParking {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1100, 601);
+		frame.setBounds(100, 100, 1154, 688);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		panel = new PanelParking();
-		panel.setBounds(15, 16, 860, 508);
+		panel.setBounds(15, 66, 878, 506);
 		frame.getContentPane().add(panel);
 
 		JButton btnSetBoat = new JButton("Set Boat");
@@ -72,7 +79,7 @@ public class FormParking {
 				FormBoatConfig config = new FormBoatConfig(new Delegate());
 			}
 		});
-		btnSetBoat.setBounds(886, 29, 173, 29);
+		btnSetBoat.setBounds(970, 26, 126, 29);
 		frame.getContentPane().add(btnSetBoat);
 
 		JButton btnSetSportBoat = new JButton("Set SportBoat");
@@ -88,24 +95,24 @@ public class FormParking {
 				panel.repaint();
 			}
 		});
-		btnSetSportBoat.setBounds(886, 74, 173, 29);
+		btnSetSportBoat.setBounds(970, 66, 126, 29);
 		frame.getContentPane().add(btnSetSportBoat);
 
 		JLabel lblTakeBoat = new JLabel("Take Boat");
-		lblTakeBoat.setBounds(939, 279, 105, 20);
+		lblTakeBoat.setBounds(970, 298, 126, 20);
 		frame.getContentPane().add(lblTakeBoat);
 
 		JLabel lblPosition = new JLabel("Position:");
-		lblPosition.setBounds(903, 309, 69, 20);
+		lblPosition.setBounds(953, 334, 81, 20);
 		frame.getContentPane().add(lblPosition);
 
 		takeTextField = new JTextField();
-		takeTextField.setBounds(1014, 307, 45, 26);
+		takeTextField.setBounds(1037, 331, 59, 26);
 		frame.getContentPane().add(takeTextField);
 		takeTextField.setColumns(10);
 
 		PanelTakeBoat takePanel = new PanelTakeBoat();
-		takePanel.setBounds(929, 409, 127, 115);
+		takePanel.setBounds(953, 415, 143, 115);
 		frame.getContentPane().add(takePanel);
 
 		JButton btnTakeBoat = new JButton("Take Boat");
@@ -123,14 +130,14 @@ public class FormParking {
 				}
 			}
 		});
-		btnTakeBoat.setBounds(929, 353, 127, 29);
+		btnTakeBoat.setBounds(970, 370, 126, 29);
 		frame.getContentPane().add(btnTakeBoat);
 
 		List list = new List();
 		for (int i = 0; i < 5; i++) {
 			list.add("Level " + i);
 		}
-		list.setBounds(929, 173, 104, 56);
+		list.setBounds(959, 138, 154, 115);
 		frame.getContentPane().add(list);
 		list.setBackground(Color.CYAN);
 		list.addActionListener(new ActionListener() {
@@ -139,5 +146,78 @@ public class FormParking {
 				panel.repaint();
 			}
 		});
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(15, 16, 81, 31);
+		frame.getContentPane().add(menuBar);
+
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+
+		JMenuItem mntmFileSave = new JMenuItem("Save");
+		mntmFileSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "Save");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    panel.SaveData(file.getAbsolutePath() + ".txt");
+				}
+			}
+		});
+		mnFile.add(mntmFileSave);
+
+		JMenuItem mntmFileLoad = new JMenuItem("Load");
+		mntmFileLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "Load");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    panel.LoadData(file.getAbsolutePath());
+				    panel.repaint();
+				}
+			}
+		});
+		mnFile.add(mntmFileLoad);
+
+		JMenu mnLevel = new JMenu("Level");
+		menuBar.add(mnLevel);
+
+		JMenuItem mntmLevelSave = new JMenuItem("Save");
+		mntmLevelSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "Save");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    panel.SaveCurrentLevel(file.getAbsolutePath() + ".lvl");
+				    panel.repaint();
+				}
+			}
+		});
+		mnLevel.add(mntmLevelSave);
+
+		JMenuItem mntmLevelLoad = new JMenuItem("Load");
+		mntmLevelLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "Load");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    panel.LoadCurrentLevel(file.getAbsolutePath());
+				    panel.repaint();
+				}
+			}
+		});
+		mnLevel.add(mntmLevelLoad);
 	}
 }

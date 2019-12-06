@@ -1,9 +1,10 @@
 import java.awt.Graphics;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
 public class PanelParking extends JPanel {
-	MultiLevelParking parking = new MultiLevelParking(20, 1000, 700);
+	MultiLevelParking parking = new MultiLevelParking(5, 1000, 700);
 	private final int countLevel = 5;
 	private int presentLevel = 0;
 	
@@ -29,5 +30,36 @@ public class PanelParking extends JPanel {
 	
 	public ITransport getTransport(int i) {
 		return parking.getTransport(i, presentLevel);
+	}
+	public void SaveData(String filename) {
+		try {
+			parking.SaveData(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadData(String filename) {
+		try {
+			parking.LoadData(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void SaveCurrentLevel(String filename) {
+		try {
+			parking.SaveLevel(filename, presentLevel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadCurrentLevel(String filename) {
+		try {
+			parking.LoadLevel(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

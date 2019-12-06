@@ -20,7 +20,19 @@ public class SportBoat extends Boat {
         Weight = weight;
         MainColor = mainColor;
         DopColor = dopColor;
-        drawMotor = new DrawMotor();
+    }
+    
+    public SportBoat(String info)
+    {
+    	super(info);
+        String[] strs = info.split(";");
+        if (strs.length == 4)
+        {
+            MaxSpeed = Integer.parseInt(strs[0]);
+            Weight = Float.parseFloat(strs[1]);
+            MainColor = new Color(Integer.parseInt(strs[2]));
+            DopColor = new Color(Integer.parseInt(strs[3]));
+        }
     }
     
     public void setDopColor(Color dop) {
@@ -31,6 +43,12 @@ public class SportBoat extends Boat {
 		drawMotor = iMotors;
 	}
 
+    @Override
+    public String ToString()
+    {
+;        return super.ToString() + ";" + DopColor.getRGB() + ";";
+    }
+
     public void DrawBoat(Graphics g) {
 	        Graphics2D g2 = (Graphics2D) g;
 	        Rectangle2D rectangle = new Rectangle2D.Double( _startPosX + 20, _startPosY + 10, 50, 30);
@@ -40,7 +58,11 @@ public class SportBoat extends Boat {
 	        g2.setPaint(Color.BLACK);
 	        g2.fill(rectangleSmall);
     		super.DrawBoat(g);
-    		if(drawMotor != null)
-    			drawMotor.DrawM(g, DopColor, (int)_startPosX, (int)_startPosY);
+    		g2.setPaint(DopColor);
+    		 g.fillOval(_startPosX, _startPosY + 25, 15, 10);
+             g.fillOval(_startPosX, _startPosY + 35, 15, 10);
+             g.fillOval(_startPosX, _startPosY + 45, 15, 10);
+    		//if(drawMotor != null)
+    			//drawMotor.DrawM(g, DopColor, (int)_startPosX, (int)_startPosY);
     }
 }

@@ -37,7 +37,20 @@ public class Parking<T extends ITransport, M extends IMotors> {
     public void setPictureHeight(int value) {
     	PictureHeight = value;
     }
+    
+    public void setBoat(int index, T transport) {
+    	_places.put(index, transport);
+    	_places.get(index).SetPosition(5 + index / 5 * _placeSizeWidth + 5, index % 5 * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+    }
 
+    public ITransport get(int index) {
+    	if (!CheckFreePlace(index))
+        {
+            return _places.get(index);
+        }
+    	return null;
+    }
+    
     public int addBoat(T boat)
     {
         for (int i = 0; i < _maxCount; i++) {
