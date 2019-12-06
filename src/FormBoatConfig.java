@@ -14,8 +14,6 @@ import javax.swing.SwingConstants;
 public class FormBoatConfig {
 
 	private JFrame frame;
-
-
 	private ITransport transport = null;
 	private IMotors iMotors = null;
 	private Color color = null;
