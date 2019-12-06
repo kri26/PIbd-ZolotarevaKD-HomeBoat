@@ -16,6 +16,18 @@ public class SportBoat extends Boat {
     public Color MainColor;
     public Color DopColor;
     IMotors drawMotor;
+    
+    public ITransport Clone(){
+    	ITransport boat = new SportBoat((int)(Math.random() * 200) + 100, 
+					 (int)(Math.random() * 1000) + 1000, 
+					 new Color((int)(Math.random() * 256), 
+							   (int)(Math.random() * 256), 
+							   (int)(Math.random() * 256)),
+					 new Color((int)(Math.random() * 256), 
+							   (int)(Math.random() * 256), 
+							   (int)(Math.random() * 256)));
+    	return boat;
+    }
 
     public SportBoat(int maxSpeed, float weight, Color mainColor, Color dopColor) {
     	super(maxSpeed, weight, mainColor);
