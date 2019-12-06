@@ -18,8 +18,6 @@ public class Parking<T extends ITransport, M extends IMotors> {
         _places = (T[]) new ITransport[sizes];
         PictureWidth = pictureWidth;
         PictureHeight = pictureHeight;
-        
-
         for (int i = 0; i < _places.length; i++) {
             _places[i] = null;
         }
@@ -61,42 +59,7 @@ public class Parking<T extends ITransport, M extends IMotors> {
 		}
         return 1;
     }
-    
-//    public int addManyBoat1(T boat)
-//    {
-//    	list.add(boat);
-//    	ITransport cloneBoat = boat.Clone();
-//    	list.add(cloneBoat);
-//    	list.add(boat);
-//    	list.add(boat);
-//    	list.add(boat);
-//    	int [] x = new int[list.size()];
-//    	int [] y = new int[list.size()];
-//        for (int i = 0; i < _places.length; i++) {
-//            if (CheckFreePlace(i)) {
-//            	for(int j = 0; j < list.size() && i < _places.length; j++) {
-//	            	_places[i] = (T) list.get(j);
-//	            	x[j] = (int)(5 + i / 5 * _placeSizeWidth + 5);
-//	            	y[j] = (int)(i % 5 * _placeSizeHeight + 15);
-//	            	_places[i].SetPosition(x, y, list.size(),PictureWidth, PictureHeight);
-//	                i++;
-//            	}
-//	            list.remove(boat);
-//	            list.remove(boat); 
-//	            list.remove(boat); 
-//	            list.remove(boat);  
-//	            list.remove(boat); 
-//            	return i;
-//            }
-//        }
-//        list.remove(boat);
-//        list.remove(boat); 
-//        list.remove(boat); 
-//        list.remove(boat); 
-//        list.remove(boat); 
-//        return -1;
-//    }
-
+	
     public T deletManyBoat(int index)
     {
         if (index < 1 || index > 4) {
@@ -154,11 +117,9 @@ public class Parking<T extends ITransport, M extends IMotors> {
             _places[index] = null;
             return boat;
         }
-
         return null;
     }
     
-
     private boolean CheckFreePlace(int index)
     {
         return _places[index] == null;
