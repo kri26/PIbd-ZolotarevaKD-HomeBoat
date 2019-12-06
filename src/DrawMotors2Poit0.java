@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class DrawMotors2Poit0 implements IMotors {
-
 	
 	NumderOfMotors directionMotor;
 	NumderOfMotors rand;
