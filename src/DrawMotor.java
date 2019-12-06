@@ -6,7 +6,6 @@ import java.awt.geom.Rectangle2D;
 
 public class DrawMotor implements IMotors {
 	
-	
 	NumderOfMotors directionMotor;
 	NumderOfMotors rand;
 	
