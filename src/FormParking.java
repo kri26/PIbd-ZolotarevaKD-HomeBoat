@@ -59,8 +59,7 @@ public class FormParking {
 		JButton btnSetBoat = new JButton("Set Boat");
 		btnSetBoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Boat boat = new Boat((int)(Math.random() * 200) + 100, 
-											  (int)(Math.random() * 1000) + 1000, 
+				Boat boat = new Boat((int)(Math.random() * 200) + 100, (int)(Math.random() * 1000) + 1000, 
 											  new Color((int)(Math.random() * 256), 
 													    (int)(Math.random() * 256), 
 													    (int)(Math.random() * 256)));
@@ -74,14 +73,7 @@ public class FormParking {
 		JButton btnSetSportBoat = new JButton("Set SportBoat");
 		btnSetSportBoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SportBoat sportBoat= new SportBoat((int)(Math.random() * 200) + 100, 
-						  												 (int)(Math.random() * 1000) + 1000, 
-						  												 new Color((int)(Math.random() * 256), 
-						  														   (int)(Math.random() * 256), 
-						  														   (int)(Math.random() * 256)),
-						  												 new Color((int)(Math.random() * 256), 
-						  														   (int)(Math.random() * 256), 
-						  														   (int)(Math.random() * 256)));
+				SportBoat sportBoat= new SportBoat((int)(Math.random() * 200) + 100, (int)(Math.random() * 256), (int)(Math.random() * 256)));
 				panel.addBoat(sportBoat);
 				panel.repaint();
 			}
