@@ -49,7 +49,7 @@ public class Parking<T extends ITransport, M extends IMotors> {
         }
         return -1;
     }
-    
+
     public T deletBoat(int index)
     {
         if (!CheckFreePlace(index)) {
