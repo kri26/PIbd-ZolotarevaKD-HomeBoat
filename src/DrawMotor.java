@@ -5,8 +5,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class DrawMotor implements IMotors {
-	
-	
 	NumderOfMotors directionMotor;
 	NumderOfMotors rand;
 	
