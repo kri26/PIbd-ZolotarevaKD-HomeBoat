@@ -12,7 +12,7 @@ public class DrawMotorsVersionThree implements IMotors {
 	@Override
 	public void DrawM(Graphics g, Color color, int _startPosX, int _startPosY) {
 		
-		g.setColor(Color.cyan);
+		g.setColor(color);
         switch (rand)
         {
             case One:

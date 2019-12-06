@@ -14,7 +14,7 @@ public class DrawMotors2Poit0 implements IMotors {
 	@Override
 	public void DrawM(Graphics g, Color color, int _startPosX, int _startPosY) {
 		
-		g.setColor(Color.yellow);
+		g.setColor(color);
         switch (rand)
         {
             case One:

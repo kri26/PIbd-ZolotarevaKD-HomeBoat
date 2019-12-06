@@ -16,23 +16,15 @@ public class PanelBoat extends JPanel {
     	}
         tranport.SetPosition((int) (Math.random() * 200) + 100, (int) (Math.random() * 100) + 50, width, height);
     }
+    
+    public void setBoat(ITransport p) {
+		tranport = p;
+		tranport.SetPosition(10, 10, 90, 50);
+	}
 
-    public void MoveTransport(Direction direction) {
-        switch (direction) {
-            case Right:
-            	tranport.MoveTransport(Direction.Right);
-                break;
-            case Left:
-            	tranport.MoveTransport(Direction.Left);
-                break;
-            case Up:
-            	tranport.MoveTransport(Direction.Up);
-                break;
-            case Down:
-            	tranport.MoveTransport(Direction.Down);
-                break;
-        }
-    }
+    public ITransport getTransportBoat() {
+		return tranport;
+	}
 
     @Override
     public void paint(Graphics g) {
