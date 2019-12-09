@@ -69,6 +69,8 @@ public class MultiLevelParking {
 
 	    public boolean SaveLevel(String filename, int lvl) throws IOException
 	    {
+	    	lvl = -5;
+	    	try {
 	    	FileWriter fw = new FileWriter(filename);
 	        WriteToFile("Level:"+ lvl + "\n", fw);
 	        Parking<ITransport, IMotors> level = parkingStages.get(lvl);
@@ -88,9 +90,10 @@ public class MultiLevelParking {
 	                WriteToFile(transport.ToString() + "\n", fw);
 	            }
 	        }
-
-	        fw.flush();
-
+	        fw.flush();	       
+	    	} catch (Exception e) {
+				// TODO: handle exception
+			}
 	        return true;
 	    }
 

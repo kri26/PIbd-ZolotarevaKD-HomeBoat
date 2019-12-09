@@ -192,12 +192,12 @@ public class FormParking {
 		mntmLevelSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser filechooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("dop", "dop");
 				filechooser.setFileFilter(filter);
 				int ret = filechooser.showDialog(null, "Save");                
 				if (ret == JFileChooser.APPROVE_OPTION) {
 				    File file = filechooser.getSelectedFile();
-				    panel.SaveCurrentLevel(file.getAbsolutePath() + ".lvl");
+				    panel.SaveCurrentLevel(file.getAbsolutePath() + ".dop");
 				    panel.repaint();
 				}
 			}
@@ -208,7 +208,7 @@ public class FormParking {
 		mntmLevelLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser filechooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("dop", "dop");
 				filechooser.setFileFilter(filter);
 				int ret = filechooser.showDialog(null, "Load");                
 				if (ret == JFileChooser.APPROVE_OPTION) {
