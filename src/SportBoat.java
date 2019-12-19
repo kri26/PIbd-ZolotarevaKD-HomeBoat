@@ -46,7 +46,7 @@ public class SportBoat extends Boat {
     @Override
     public String ToString()
     {
-;        return super.ToString() + ";" + DopColor.getRGB() + ";";
+        return super.ToString() + ";" + DopColor.getRGB() + ";";
     }
 
     public void DrawBoat(Graphics g) {
