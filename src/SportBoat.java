@@ -62,7 +62,5 @@ public class SportBoat extends Boat {
     		 g.fillOval(_startPosX, _startPosY + 25, 15, 10);
              g.fillOval(_startPosX, _startPosY + 35, 15, 10);
              g.fillOval(_startPosX, _startPosY + 45, 15, 10);
-    		//if(drawMotor != null)
-    			//drawMotor.DrawM(g, DopColor, (int)_startPosX, (int)_startPosY);
     }
 }
