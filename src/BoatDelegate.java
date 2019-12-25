@@ -1,6 +1,4 @@
 
 abstract public class BoatDelegate {
-	public void induce(ITransport transportBoat) {		
-	}
-
+	abstract public void induce(ITransport transportBoat);
 }
