@@ -167,6 +167,7 @@ public class FormParking {
 					panel.repaint();
 					hashtable.put(k, transport);
 					k++;
+					logger.info("Взяли катер с места " + s);
 				}
 				catch (ParkingNotFoundException ex) {
 					logger_error.warning("Катер не найден");
@@ -238,6 +239,8 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.LoadData(file.getAbsolutePath());
 					    panel.repaint();
+					    JOptionPane.showMessageDialog(null, "Загружено");
+					    logger.info("Загрузили все");
 					}
 				}
 				catch (ParkingOccupiedPlaceException ex) {
@@ -268,6 +271,8 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.SaveCurrentLevel(file.getAbsolutePath() + ".dop");
 					    panel.repaint();
+					    JOptionPane.showMessageDialog(null, "Сохранено");
+					    logger.info("Сохранили");
 					}
 				}
 				catch (Exception ex) {
@@ -291,6 +296,8 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.LoadCurrentLevel(file.getAbsolutePath());
 					    panel.repaint();
+					    JOptionPane.showMessageDialog(null, "Загружено");
+					    logger.info("Загрузили");
 					}
 				}
 				catch (IOException ex) {
