@@ -31,19 +31,23 @@ public class PanelParking extends JPanel {
 	public ITransport getTransport(int i) {
 		return parking.getTransport(i, presentLevel);
 	}
-	public void SaveData(String filename) {
+	
+	public void SaveData(String filename) throws IOException {
 		try {
 			parking.SaveData(filename);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException ex) {
+			throw ex; 
 		}
 	}
 
-	public void LoadData(String filename) {
+	public void LoadData(String filename) throws ParkingOccupiedPlaceException, IOException  {
 		try {
 			parking.LoadData(filename);
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+		catch (ParkingOccupiedPlaceException | IOException ex) {
+			if (ex instanceof ParkingOccupiedPlaceException) {
+				throw new ParkingOccupiedPlaceException(parking.getCounter());
+			} else throw new IOException();
 		}
 	}
 
@@ -55,11 +59,13 @@ public class PanelParking extends JPanel {
 		}
 	}
 
-	public void LoadCurrentLevel(String filename) {
+	public void LoadCurrentLevel(String filename) throws ParkingOccupiedPlaceException, IOException {
 		try {
 			parking.LoadLevel(filename);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (ParkingOccupiedPlaceException ex) {
+			throw ex;			
+		} catch (IOException ex) {
+			throw ex;
 		}
 	}
 }

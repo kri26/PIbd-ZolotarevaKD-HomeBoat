@@ -4,12 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.util.logging.Logger;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 public class FormBoatConfig {
 
@@ -20,6 +24,8 @@ public class FormBoatConfig {
 	private IMotors iMotors = null;
 	private Color color = null;
 	BoatDelegate AddBoat;
+	
+	private Logger logger_error;
 	
 	/**
 	 * Launch the application.
@@ -49,6 +55,20 @@ public class FormBoatConfig {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		logger_error = Logger.getLogger("MyLog2");
+		try {
+			FileHandler fh_e = null;
+			fh_e = new FileHandler("C:\\Users\\krist\\Desktop\\file_error.txt");
+			logger_error.addHandler(fh_e);
+			logger_error.setUseParentHandlers(false);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh_e.setFormatter(formatter);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 645, 352);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,7 +149,15 @@ public class FormBoatConfig {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
 				AddBoat.induce(panel.getTransportBoat());
+				}
+				catch (ParkingOverflowException e1)
+				{
+					logger_error.warning("Переполнение");
+					JOptionPane.showMessageDialog(frame, e1.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				frame.dispose();
 			}
 		});

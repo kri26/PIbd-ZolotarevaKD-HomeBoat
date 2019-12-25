@@ -4,12 +4,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.io.IOException;
 
 public class MultiLevelParking {
 
 	ArrayList <Parking<ITransport, IMotors>> parkingStages;
 	int pictureHeight;
 	int pictureWidth;
+
+    int counter = -1;
+
+	public int getCounter() {
+		return counter;
+	}
 
 	private static final int countPlaces = 20;
 
@@ -30,17 +37,22 @@ public class MultiLevelParking {
 		return null;
 	}
 
-	public ITransport getTransport(int index, int lvl) {
+	public ITransport getTransport(int index, int lvl) throws ParkingNotFoundException {
 		if (lvl > -1 && lvl < parkingStages.size()) {
-			ITransport plane = parkingStages.get(lvl).deletBoat(index);
-			return plane;
+			try {
+				ITransport transport = parkingStages.get(lvl).deletBoat(index);
+				return transport;
+			}
+			catch(ParkingNotFoundException ex) {
+				throw new ParkingNotFoundException(index);
+			}
 		}
 		return null;
 	}
 	
 	 public boolean SaveData(String filename) throws IOException
 	    {
-	    	FileWriter fw = new FileWriter(filename);
+		 FileWriter fw = new FileWriter(filename);
 	        WriteToFile("CountLeveles:"+ parkingStages.size() + "\n", fw);
 	        for (Parking<ITransport, IMotors> level : parkingStages)
 	        {
@@ -101,9 +113,9 @@ public class MultiLevelParking {
 			}
 	    }
 
-	    public boolean LoadData(String filename) throws IOException
+	    public boolean LoadData(String filename) throws IOException, ParkingOccupiedPlaceException
 	    {
-	        FileReader fr = new FileReader(filename);
+	    	FileReader fr = new FileReader(filename);
 	        String bufferTextFromFile = "";
 	        int counter = -1;
 
@@ -154,7 +166,7 @@ public class MultiLevelParking {
 	        return true;
 	    }
 
-	    public boolean LoadLevel(String filename) throws IOException
+	    public boolean LoadLevel(String filename) throws IOException, ParkingOccupiedPlaceException
 	    {
 	        FileReader fr = new FileReader(filename);
 	        String bufferTextFromFile = "";

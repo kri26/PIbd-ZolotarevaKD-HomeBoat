@@ -38,12 +38,16 @@ public class Parking<T extends ITransport, M extends IMotors> {
     	PictureHeight = value;
     }
     
-    public void setBoat(int index, T transport) {
-    	_places.put(index, transport);
-    	_places.get(index).SetPosition(5 + index / 5 * _placeSizeWidth + 5, index % 5 * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+    public int setBoat(int index, T transport) throws ParkingOccupiedPlaceException {
+	    if (CheckFreePlace(index)) {
+	    	_places.put(index, transport);
+	    	_places.get(index).SetPosition(5 + index / 5 * _placeSizeWidth + 5, index % 5 * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+	    	return index;
+    	}
+    	throw new ParkingOccupiedPlaceException(index);
     }
 
-    public ITransport get(int index) {
+    public ITransport get (int index) {
     	if (!CheckFreePlace(index))
         {
             return _places.get(index);
@@ -51,7 +55,7 @@ public class Parking<T extends ITransport, M extends IMotors> {
     	return null;
     }
     
-    public int addBoat(T boat)
+    public int addBoat(T boat) throws ParkingOverflowException 
     {
         for (int i = 0; i < _maxCount; i++) {
             if (CheckFreePlace(i)) {
@@ -60,17 +64,21 @@ public class Parking<T extends ITransport, M extends IMotors> {
                 return i;
             }
         }
-        return -1;
+        throw new ParkingOverflowException();
     }
 
-    public T deletBoat(int index)
+    public T deletBoat(int index)  throws ParkingNotFoundException
     {
+    	if (index < 0 || index > 20)
+        {
+    		throw new ParkingNotFoundException(index);
+        }
         if (!CheckFreePlace(index)) {
             T boat = _places.get(index);
             _places.remove(index);
             return boat;
         }
-        return null;
+        throw new ParkingNotFoundException(index);
     }
     
 
