@@ -55,10 +55,10 @@ public class FormBoatConfig {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		logger_error = Logger.getLogger("MyLog2");
+		logger_error = Logger.getLogger("MyDopLog");
 		try {
 			FileHandler fh_e = null;
-			fh_e = new FileHandler("C:\\Users\\krist\\Desktop\\file_error.txt");
+			fh_e = new FileHandler("C:\\Users\\krist\\Desktop\\ро\\file_error.txt");
 			logger_error.addHandler(fh_e);
 			logger_error.setUseParentHandlers(false);
 			SimpleFormatter formatter = new SimpleFormatter();
