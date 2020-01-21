@@ -44,10 +44,11 @@ public class PanelParking extends JPanel {
 		try {
 			parking.LoadData(filename);
 		}
-		catch (ParkingOccupiedPlaceException | IOException ex) {
-			if (ex instanceof ParkingOccupiedPlaceException) {
-				throw new ParkingOccupiedPlaceException(parking.getCounter());
-			} else throw new IOException();
+		catch (ParkingOccupiedPlaceException ex) {
+			throw ex;			
+		} 
+		catch (IOException ex) {
+			throw ex;
 		}
 	}
 
@@ -62,9 +63,11 @@ public class PanelParking extends JPanel {
 	public void LoadCurrentLevel(String filename) throws ParkingOccupiedPlaceException, IOException {
 		try {
 			parking.LoadLevel(filename);
-		} catch (ParkingOccupiedPlaceException ex) {
+		} 
+		catch (ParkingOccupiedPlaceException ex) {
 			throw ex;			
-		} catch (IOException ex) {
+		} 
+		catch (IOException ex) {
 			throw ex;
 		}
 	}
