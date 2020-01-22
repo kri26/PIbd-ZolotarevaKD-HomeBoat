@@ -232,7 +232,7 @@ public class MultiLevelParking {
 	                 }
 		            }
 		        } 
-	    	return "";
+	    	return null;
 		}
 
 		public void _sort() {
