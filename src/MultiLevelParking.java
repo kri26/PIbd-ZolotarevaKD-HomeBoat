@@ -40,13 +40,9 @@ public class MultiLevelParking {
 
 	public ITransport getTransport(int index, int lvl) throws ParkingNotFoundException {
 		if (lvl > -1 && lvl < parkingStages.size()) {
-			try {
-				ITransport transport = parkingStages.get(lvl)._places.get(index);
-				parkingStages.get(lvl).deletBoat(index);
-				return transport;
-			}
-			catch(ParkingNotFoundException ex) {
-				throw new ParkingNotFoundException(index);
+
+			ITransport transport = parkingStages.get(lvl).deletBoat(index);
+			return transport;
 			}
 		}
 		return null;
@@ -80,7 +76,7 @@ public class MultiLevelParking {
           if ((lvl > parkingStages.size()) || (lvl < 0)) {
               return false;
             }
-	    	FileWriter fw = new FileWriter(filename);
+	    	  FileWriter fw = new FileWriter(filename);
 	        WriteToFile("Level:"+ lvl + "\n", fw);
 	        Parking<ITransport, IMotors> level = parkingStages.get(lvl);
 	        for (int i = 0; i < countPlaces; i++)
