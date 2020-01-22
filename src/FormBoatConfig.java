@@ -100,8 +100,7 @@ public class FormBoatConfig {
 		lblBoat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				transport = new Boat((int)(Math.random() * 200) + 100, 
-						  (int)(Math.random() * 1000) + 1000, 
+				transport = new Boat(100, 1000, 
 						  new Color((int)(Math.random() * 256), 
 								    (int)(Math.random() * 256), 
 								    (int)(Math.random() * 256)));
@@ -119,8 +118,7 @@ public class FormBoatConfig {
 		lblSportBoat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				transport = new SportBoat((int)(Math.random() * 200) + 100, 
-							 (int)(Math.random() * 1000) + 1000, 
+				transport = new SportBoat(100, 1000, 
 							 new Color((int)(Math.random() * 256), 
 									   (int)(Math.random() * 256), 
 									   (int)(Math.random() * 256)),
@@ -157,6 +155,9 @@ public class FormBoatConfig {
 					logger_error.warning("Переполнение");
 					JOptionPane.showMessageDialog(frame, e1.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 					return;
+				} catch (ParkingAlreadyHaveException e) {
+					logger_error.warning("На парковке уже есть такой катер");
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 				frame.dispose();
 			}

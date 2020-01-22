@@ -19,7 +19,7 @@ public class PanelParking extends JPanel {
 		}
 	}
 	
-	public int addBoat(ITransport transport) {
+	public int addBoat(ITransport transport) throws ParkingOverflowException, ParkingAlreadyHaveException {
 		return parking.getParking(presentLevel).addBoat(transport);
 	}
 	
@@ -70,5 +70,13 @@ public class PanelParking extends JPanel {
 		catch (IOException ex) {
 			throw ex;
 		}
+	}
+		
+	public String printShipsConfig() {
+		return parking.printShipsConfig();
+	}
+
+	public void _sort() {
+		parking._sort();
 	}
 }

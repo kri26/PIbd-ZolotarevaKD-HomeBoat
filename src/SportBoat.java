@@ -42,6 +42,10 @@ public class SportBoat extends Boat {
     public void setMotors(IMotors iMotors) {
 		drawMotor = iMotors;
 	}
+    
+    public IMotors getMotors() {
+    	return drawMotor;
+    }
 
     @Override
     public String ToString()
@@ -59,8 +63,47 @@ public class SportBoat extends Boat {
 	        g2.fill(rectangleSmall);
     		super.DrawBoat(g);
     		g2.setPaint(DopColor);
+    		if(drawMotor != null) {
+    			drawMotor.DrawM(g, DopColor, _startPosX, _startPosY);
+    		} else {
     		 g.fillOval(_startPosX, _startPosY + 25, 15, 10);
              g.fillOval(_startPosX, _startPosY + 35, 15, 10);
              g.fillOval(_startPosX, _startPosY + 45, 15, 10);
+    		}
     }
+    
+    @Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	public boolean equals(SportBoat boat) {
+		if (ToString().equals(boat.ToString())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		return equals((SportBoat)obj);
+	}
+
+	public int compareTo(SportBoat boat) {
+		if (boat == null)
+			return 1;
+        if (!DopColor.equals(boat.DopColor))
+        	return Integer.compare(DopColor.getRGB(), boat.DopColor.getRGB());
+        if (MaxSpeed != boat.MaxSpeed)
+        	return Integer.compare(MaxSpeed, boat.MaxSpeed);
+        if (Weight != boat.Weight)
+        	return Integer.compare((int)Weight, (int)boat.Weight);
+        if (!MainColor.equals(boat.MainColor))
+        	return Integer.compare(MainColor.getRGB(), boat.MainColor.getRGB());
+        return 0;
+	}
 }

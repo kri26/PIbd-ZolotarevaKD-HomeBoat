@@ -53,14 +53,14 @@ public class FormParking {
 	/**
 	 * Create the application.
 	 */
-	public FormParking()  throws ParkingNotFoundException, ParkingOverflowException, 
+	public FormParking() throws ParkingNotFoundException, ParkingOverflowException, 
 							SecurityException, IOException, ParkingOccupiedPlaceException {
 		initialize();
 	}
 
 	class Delegate extends BoatDelegate {
 		@Override
-		public void induce(ITransport transport) {
+		public void induce(ITransport transport) throws ParkingOverflowException, ParkingAlreadyHaveException {
 			panel.addBoat(transport);
 			panel.repaint();
 		}
@@ -119,8 +119,7 @@ public class FormParking {
 		btnSetSportBoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					SportBoat sportBoat = new SportBoat((int) (Math.random() * 200) + 100,
-							(int) (Math.random() * 1000) + 1000,
+					SportBoat sportBoat = new SportBoat(100, 1000,
 							new Color((int) (Math.random() * 256), (int) (Math.random() * 256),
 									(int) (Math.random() * 256)),
 							new Color((int) (Math.random() * 256), (int) (Math.random() * 256),
@@ -132,6 +131,10 @@ public class FormParking {
 				catch (ParkingOverflowException ex) {
 					logger_error.warning("Переполнение");
 					JOptionPane.showMessageDialog(null, "Переполнение");
+				}
+				catch(ParkingAlreadyHaveException ex) {
+					logger_error.warning("На парковке уже есть такой катер");
+					JOptionPane.showMessageDialog(null, ex.getMessage());
 				}
 			}
 		});
@@ -311,5 +314,33 @@ public class FormParking {
 			}
 		});
 		mnLevel.add(mntmLevelLoad);
+				
+		JButton btnSort = new JButton("Сортировка");
+		btnSort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel._sort();
+				panel.repaint();
+				logger.info("Сортировка уровней");
+			}
+		});
+		btnSort.setBounds(970, 106, 126, 29);
+		frame.getContentPane().add(btnSort);
+
+
+		JLabel lblConfigs = new JLabel("");
+		lblConfigs.setBounds(900, 520, 226, 209);
+		frame.getContentPane().add(lblConfigs);
+
+		
+		JButton buttonGetConfigs = new JButton("Свойства");
+		buttonGetConfigs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.printShipsConfig();
+			}
+		});
+		buttonGetConfigs.setBounds(970, 265, 126, 29);
+		frame.getContentPane().add(buttonGetConfigs);
+		
+
 	}
 }

@@ -59,7 +59,8 @@ public class ParkingForm {
 											  new Color((int)(Math.random() * 256), 
 													    (int)(Math.random() * 256), 
 													    (int)(Math.random() * 256)));
-				panel.addBoat(boat);
+				IMotors motors = new DrawMotors2Poit0();
+				panel.addBoat(boat, motors);
 				panel.repaint();
 			}
 		});

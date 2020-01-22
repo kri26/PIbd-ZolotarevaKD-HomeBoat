@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.io.IOException;
+import java.util.Collections;
 
 public class MultiLevelParking {
 
@@ -25,7 +26,7 @@ public class MultiLevelParking {
 		pictureWidth = _pictureWidth;
 		parkingStages = new ArrayList<Parking<ITransport, IMotors>>();
 		for (int i = 0; i < countStages; ++i) {
-			parkingStages.add(i,new Parking<ITransport, IMotors>(countPlaces, pictureWidth, pictureHeight));
+			parkingStages.add(new Parking<ITransport, IMotors>(countPlaces, pictureWidth, pictureHeight));
 		}
 	}
 
@@ -40,7 +41,8 @@ public class MultiLevelParking {
 	public ITransport getTransport(int index, int lvl) throws ParkingNotFoundException {
 		if (lvl > -1 && lvl < parkingStages.size()) {
 			try {
-				ITransport transport = parkingStages.get(lvl).deletBoat(index);
+				ITransport transport = parkingStages.get(lvl)._places.get(index);
+				parkingStages.get(lvl).deletBoat(index);
 				return transport;
 			}
 			catch(ParkingNotFoundException ex) {
@@ -51,37 +53,30 @@ public class MultiLevelParking {
 	}
 	
 	 public boolean SaveData(String filename) throws IOException
-	    {
+	    { 
 		 FileWriter fw = new FileWriter(filename);
 	        WriteToFile("CountLeveles:"+ parkingStages.size() + "\n", fw);
 	        for (Parking<ITransport, IMotors> level : parkingStages)
 	        {
 	            WriteToFile("Level" + "\n", fw);
-	            for (int i = 0; i < countPlaces; i++)
-	            {
-	                ITransport transport = level.get(i);
-	                if (transport != null)
-	                {
-	                    if (transport.getClass().getName() == "Boat")
-	                    {
-	                        WriteToFile(i + ":Boat:", fw);
-	                    }
-	                    if (transport.getClass().getName() == "SportBoat")
-	                    {
-	                        WriteToFile(i + ":SportBoat:", fw);
-	                    }
-	                    WriteToFile(transport.ToString() + "\n", fw);
-	                }
+	            for(ITransport transport : level) {
+	            	if (transport.getClass().getName() == "Boat")
+                    {
+                        WriteToFile(level.GetKey() + ":Boat:", fw);
+                    }
+                    if (transport.getClass().getName() == "SportBoat")
+                    {
+                        WriteToFile(level.GetKey() + ":SportBoat:", fw);
+                    }
+                  WriteToFile(transport.ToString() + "\n", fw);
 	            }
 	        }
-
 	        fw.flush();
 	        return true;
 	    }
 
 	    public boolean SaveLevel(String filename, int lvl) throws IOException
 	    {
-	    	try {
           if ((lvl > parkingStages.size()) || (lvl < 0)) {
               return false;
             }
@@ -220,4 +215,27 @@ public class MultiLevelParking {
 
 	        return true;
 	    }
+	    
+	    public String printShipsConfig() {
+	    	for (Parking<ITransport, IMotors> level : parkingStages)
+		        {
+		            for(ITransport transport : level) {
+		            	if (transport.getClass().getName() == "Boat")
+	                 {
+		            	System.out.println(level.GetKey() + ":Boat:" + transport.ToString());
+		            	return level.GetKey() + ":Boat:" + transport.ToString();
+	                 }
+	                 if (transport.getClass().getName() == "SportBoat")
+	                 {
+	                 	System.out.println(level.GetKey() + ":SportBoat:" + transport.ToString());
+	                 	return level.GetKey() + ":SportBoat:" + transport.ToString();
+	                 }
+		            }
+		        } 
+	    	return "";
+		}
+
+		public void _sort() {
+			Collections.sort(parkingStages);
+		}
 } 

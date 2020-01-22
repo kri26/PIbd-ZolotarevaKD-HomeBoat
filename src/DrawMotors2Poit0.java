@@ -30,4 +30,13 @@ public class DrawMotors2Poit0 implements IMotors {
                 break;
         }
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		return true;
+	}
 }

@@ -2,24 +2,29 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
-public class Parking<T extends ITransport, M extends IMotors> {
+public class Parking<T extends ITransport, M extends IMotors>  implements Comparable<Parking<T, M>>, Iterable<T>, Iterator<T> {
 	HashMap<Integer, T> _places;
+	private HashMap<Integer, M> _placesWithMotor;
     private int PictureWidth;
     private int PictureHeight;
 
     private final int _placeSizeWidth = 210;
     private final int _placeSizeHeight = 80;
     int _maxCount;
+    private int _currentIndex;
     
 	ArrayList list = new ArrayList();
 
     public Parking(int sizes, int pictureWidth, int pictureHeight)
     {
     	_places = new HashMap<Integer, T>(sizes);
+    	_placesWithMotor = new HashMap<Integer, M>(sizes);
     	_maxCount = sizes;
         PictureWidth = pictureWidth;
         PictureHeight = pictureHeight;
+        _currentIndex = -1;
     }
     
     public int getPictureWidth() {
@@ -55,8 +60,10 @@ public class Parking<T extends ITransport, M extends IMotors> {
     	return null;
     }
     
-    public int addBoat(T boat) throws ParkingOverflowException 
+    public int addBoat(T boat) throws ParkingOverflowException, ParkingAlreadyHaveException 
     {
+    	if (_places.containsValue(boat))
+            throw new ParkingAlreadyHaveException();
         for (int i = 0; i < _maxCount; i++) {
             if (CheckFreePlace(i)) {
             	_places.put(i, boat);
@@ -108,4 +115,59 @@ public class Parking<T extends ITransport, M extends IMotors> {
             g.drawLine(i * _placeSizeWidth, 0, i * _placeSizeWidth, 400);
         }
     }
+    
+    public int GetKey() {
+    	return (int)_places.keySet().toArray()[_currentIndex];
+    }
+    
+    public int compareTo(Parking<T, M> other) {
+    	if (_places.size() > other._places.size())
+    		return -1;
+        else if (_places.size() < other._places.size())
+        	return 1;
+        else if (_places.size() > 0)
+        {
+        	Object[] thisKeys = _places.keySet().toArray();
+        	Object[] otherKeys = other._places.keySet().toArray();
+            for (int i = 0; i < _places.size(); ++i)
+            {
+                if (_places.get(thisKeys[i]).getClass().getName().equals("Boat") && other._places.get(thisKeys[i]).getClass().getName().equals("SportBoat"))
+                	return 1;
+                if (_places.get(thisKeys[i]).getClass().getName().equals("SportBoat") && other._places.get(thisKeys[i]).getClass().getName().equals("Boat"))
+                	return -1;
+                if (_places.get(thisKeys[i]).getClass().getName().equals("Boat") && other._places.get(thisKeys[i]).getClass().getName().equals("Boat"))
+                {
+                	Boat thisBoat = (Boat)_places.get(thisKeys[i]);
+                    Boat otherBoat = (Boat)other._places.get(otherKeys[i]);
+                    return thisBoat.compareTo(otherBoat);
+                }
+                if(_places.get(thisKeys[i]).getClass().getName().equals("SportBoat") && other._places.get(thisKeys[i]).getClass().getName().equals("SportBoat")) {
+                	SportBoat thisBoat = (SportBoat)_places.get(thisKeys[i]);
+                    SportBoat otherBoat = (SportBoat)other._places.get(otherKeys[i]);
+                    return thisBoat.compareTo(otherBoat);
+                }
+            }
+        }
+        return 0;
+    }
+
+	@Override
+	public Iterator<T> iterator() {
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		if (_currentIndex + 1 >= _places.size())
+		{
+			_currentIndex = -1;
+			return false;
+		}else
+			return true;
+	}
+
+	@Override
+	public T next() {
+		return _places.get(++_currentIndex); 
+	}
 }
