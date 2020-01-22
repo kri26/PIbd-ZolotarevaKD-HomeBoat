@@ -39,12 +39,8 @@ public class MultiLevelParking {
 
 	public ITransport getTransport(int index, int lvl) throws ParkingNotFoundException {
 		if (lvl > -1 && lvl < parkingStages.size()) {
-			try {
-				ITransport transport = parkingStages.get(lvl).deletBoat(index);
-				return transport;
-			}
-			catch(ParkingNotFoundException ex) {
-				throw new ParkingNotFoundException(index);
+			ITransport transport = parkingStages.get(lvl).deletBoat(index);
+			return transport;
 			}
 		}
 		return null;
