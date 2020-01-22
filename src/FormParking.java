@@ -76,8 +76,8 @@ public class FormParking {
 		try {
 			FileHandler fh = null;
 			FileHandler fh_e = null;
-			fh = new FileHandler("C:\\Users\\krist\\Desktop\\ТП\\file_info.txt");
-			fh_e = new FileHandler("C:\\Users\\krist\\Desktop\\ТП\\file_error.txt");
+			fh = new FileHandler("C:\\Users\\krist\\Desktop\\Г’ГЏ\\file_info.txt");
+			fh_e = new FileHandler("C:\\Users\\krist\\Desktop\\Г’ГЏ\\file_error.txt");
 			logger.addHandler(fh);
 			logger_error.addHandler(fh_e);
 			logger.setUseParentHandlers(false);
@@ -104,11 +104,11 @@ public class FormParking {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				FormBoatConfig config = new FormBoatConfig(new Delegate());
-				logger.info("Добавили катер");
+				logger.info("Г„Г®ГЎГ ГўГЁГ«ГЁ ГЄГ ГІГҐГ°");
 				}
 				catch (ParkingOverflowException ex) {
-					logger_error.warning("Переполнение");
-					JOptionPane.showMessageDialog(null, "Переполнение");
+					logger_error.warning("ГЏГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГҐ");
+					JOptionPane.showMessageDialog(null, "ГЏГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГҐ");
 				}
 			}
 		});
@@ -126,14 +126,14 @@ public class FormParking {
 									(int) (Math.random() * 256)));
 					panel.addBoat(sportBoat);
 					panel.repaint();
-					logger.info("Добавили катер");
+					logger.info("Г„Г®ГЎГ ГўГЁГ«ГЁ ГЄГ ГІГҐГ°");
 				}
 				catch (ParkingOverflowException ex) {
-					logger_error.warning("Переполнение");
-					JOptionPane.showMessageDialog(null, "Переполнение");
+					logger_error.warning("ГЏГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГҐ");
+					JOptionPane.showMessageDialog(null, "ГЏГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГҐ");
 				}
 				catch(ParkingAlreadyHaveException ex) {
-					logger_error.warning("На парковке уже есть такой катер");
+					logger_error.warning("ГЌГ  ГЇГ Г°ГЄГ®ГўГЄГҐ ГіГ¦ГҐ ГҐГ±ГІГј ГІГ ГЄГ®Г© ГЄГ ГІГҐГ°");
 					JOptionPane.showMessageDialog(null, ex.getMessage());
 				}
 			}
@@ -170,15 +170,15 @@ public class FormParking {
 					panel.repaint();
 					hashtable.put(k, transport);
 					k++;
-					logger.info("Взяли катер с места " + s);
+					logger.info("Г‚Г§ГїГ«ГЁ ГЄГ ГІГҐГ° Г± Г¬ГҐГ±ГІГ  " + s);
 				}
 				catch (ParkingNotFoundException ex) {
-					logger_error.warning("Катер не найден");
-					JOptionPane.showMessageDialog(null, "Катер не найден",
+					logger_error.warning("ГЉГ ГІГҐГ° Г­ГҐ Г­Г Г©Г¤ГҐГ­");
+					JOptionPane.showMessageDialog(null, "ГЉГ ГІГҐГ° Г­ГҐ Г­Г Г©Г¤ГҐГ­",
 							"Exception", 0, null);
 				} catch (Exception ex) {
-					logger_error.warning("Ошибка");
-					JOptionPane.showMessageDialog(frame, "Ошибка",
+					logger_error.warning("ГЋГёГЁГЎГЄГ ");
+					JOptionPane.showMessageDialog(frame, "ГЋГёГЁГЎГЄГ ",
 							"Exception", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -218,13 +218,13 @@ public class FormParking {
 					if (ret == JFileChooser.APPROVE_OPTION) {
 						File file = filechooser.getSelectedFile();
 					    panel.SaveData(file.getAbsolutePath() + ".txt");
-						JOptionPane.showMessageDialog(null, "Сохранено");
-					    logger.info("Сохранили все");
+						JOptionPane.showMessageDialog(null, "Г‘Г®ГµГ°Г Г­ГҐГ­Г®");
+					    logger.info("Г‘Г®ГµГ°Г Г­ГЁГ«ГЁ ГўГ±ГҐ");
 					}
 				}
 				 catch (Exception e1) {						
-					    logger_error.warning("Ошибка при сохранении");
-						JOptionPane.showMessageDialog(null, "Ошибка при сохранении");
+					    logger_error.warning("ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГЁ");
+						JOptionPane.showMessageDialog(null, "ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГЁ");
 				 }
 			}
 		});
@@ -242,18 +242,18 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.LoadData(file.getAbsolutePath());
 					    panel.repaint();
-					    JOptionPane.showMessageDialog(null, "Загружено");
-					    logger.info("Загрузили все");
+					    JOptionPane.showMessageDialog(null, "Г‡Г ГЈГ°ГіГ¦ГҐГ­Г®");
+					    logger.info("Г‡Г ГЈГ°ГіГ§ГЁГ«ГЁ ГўГ±ГҐ");
 					}
 				}
 				catch (ParkingOccupiedPlaceException ex) {
-					logger_error.warning("Место занято " + ex.getMessage());
+					logger_error.warning("ГЊГҐГ±ГІГ® Г§Г Г­ГїГІГ® " + ex.getMessage());
 					JOptionPane.showMessageDialog(frame, ex.getMessage(),
 							"Exception", JOptionPane.ERROR_MESSAGE);
 				} 
 				catch (Exception ex) {
-					logger_error.warning("Ошибка");
-					JOptionPane.showMessageDialog(frame, "Ошибка", "Exception", JOptionPane.ERROR_MESSAGE);
+					logger_error.warning("ГЋГёГЁГЎГЄГ ");
+					JOptionPane.showMessageDialog(frame, "ГЋГёГЁГЎГЄГ ", "Exception", JOptionPane.ERROR_MESSAGE);
 				 }				
 			}
 		});
@@ -274,13 +274,13 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.SaveCurrentLevel(file.getAbsolutePath() + ".dop");
 					    panel.repaint();
-					    JOptionPane.showMessageDialog(null, "Сохранено");
-					    logger.info("Сохранили");
+					    JOptionPane.showMessageDialog(null, "Г‘Г®ГµГ°Г Г­ГҐГ­Г®");
+					    logger.info("Г‘Г®ГµГ°Г Г­ГЁГ«ГЁ");
 					}
 				}
 				catch (Exception ex) {
-					logger_error.warning("Ошибка при сохранении уровня");
-					JOptionPane.showMessageDialog(frame, "Ошибка при сохранении уровня",
+					logger_error.warning("ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГЁ ГіГ°Г®ГўГ­Гї");
+					JOptionPane.showMessageDialog(frame, "ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г±Г®ГµГ°Г Г­ГҐГ­ГЁГЁ ГіГ°Г®ГўГ­Гї",
 							"Exception", JOptionPane.ERROR_MESSAGE);
 				 }
 			}
@@ -299,40 +299,34 @@ public class FormParking {
 					    File file = filechooser.getSelectedFile();
 					    panel.LoadCurrentLevel(file.getAbsolutePath());
 					    panel.repaint();
-					    JOptionPane.showMessageDialog(null, "Загружено");
-					    logger.info("Загрузили");
+					    JOptionPane.showMessageDialog(null, "Г‡Г ГЈГ°ГіГ¦ГҐГ­Г®");
+					    logger.info("Г‡Г ГЈГ°ГіГ§ГЁГ«ГЁ");
 					}
 				}
 				catch (IOException ex) {
-					logger_error.warning("Ошибка загрузки уровня" + ex.getMessage());
-					JOptionPane.showMessageDialog(frame, "Место занято" + ex.getMessage(),
+					logger_error.warning("ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ ГіГ°Г®ГўГ­Гї" + ex.getMessage());
+					JOptionPane.showMessageDialog(frame, "ГЊГҐГ±ГІГ® Г§Г Г­ГїГІГ®" + ex.getMessage(),
 								"Exception", JOptionPane.ERROR_MESSAGE);
 				} catch (ParkingOccupiedPlaceException ex) {
-					logger_error.warning("Место занято" + ex.getMessage());
+					logger_error.warning("ГЊГҐГ±ГІГ® Г§Г Г­ГїГІГ®" + ex.getMessage());
 					JOptionPane.showMessageDialog(frame, ex.getMessage(),"Exception", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		mnLevel.add(mntmLevelLoad);
 				
-		JButton btnSort = new JButton("Сортировка");
+		JButton btnSort = new JButton("Г‘Г®Г°ГІГЁГ°Г®ГўГЄГ ");
 		btnSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel._sort();
 				panel.repaint();
-				logger.info("Сортировка уровней");
+				logger.info("Г‘Г®Г°ГІГЁГ°Г®ГўГЄГ  ГіГ°Г®ГўГ­ГҐГ©");
 			}
 		});
 		btnSort.setBounds(970, 106, 126, 29);
 		frame.getContentPane().add(btnSort);
-
-
-		JLabel lblConfigs = new JLabel("");
-		lblConfigs.setBounds(900, 520, 226, 209);
-		frame.getContentPane().add(lblConfigs);
-
 		
-		JButton buttonGetConfigs = new JButton("Свойства");
+		JButton buttonGetConfigs = new JButton("Г‘ГўГ®Г©Г±ГІГўГ ");
 		buttonGetConfigs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.printShipsConfig();
