@@ -77,10 +77,9 @@ public class MultiLevelParking {
 
 	    public boolean SaveLevel(String filename, int lvl) throws IOException
 	    {
-	    	try {
-          if ((lvl > parkingStages.size()) || (lvl < 0)) {
-              return false;
-            }
+         	 if ((lvl > parkingStages.size()) || (lvl < 0)) {
+              		return false;
+            	}
 	    	FileWriter fw = new FileWriter(filename);
 	        WriteToFile("Level:"+ lvl + "\n", fw);
 	        Parking<ITransport, IMotors> level = parkingStages.get(lvl);
