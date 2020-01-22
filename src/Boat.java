@@ -63,7 +63,7 @@ public class Boat extends Vehicle implements Comparable<Boat>, Iterator<String>,
    	}
    	
    	public int compareTo(Boat other) {
-		if (other == null)
+	if (other == null)
             return 1;
         if (MaxSpeed != other.MaxSpeed)
             return Integer.compare(MaxSpeed, other.MaxSpeed);
