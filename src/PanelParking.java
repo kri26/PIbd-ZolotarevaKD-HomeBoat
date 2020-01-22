@@ -33,42 +33,18 @@ public class PanelParking extends JPanel {
 	}
 	
 	public void SaveData(String filename) throws IOException {
-		try {
-			parking.SaveData(filename);
-		} catch (IOException ex) {
-			throw ex; 
-		}
+		parking.SaveData(filename);
 	}
 
 	public void LoadData(String filename) throws ParkingOccupiedPlaceException, IOException  {
-		try {
-			parking.LoadData(filename);
-		}
-		catch (ParkingOccupiedPlaceException ex) {
-			throw ex;			
-		} 
-		catch (IOException ex) {
-			throw ex;
-		}
+		parking.LoadData(filename);
 	}
 
 	public void SaveCurrentLevel(String filename) {
-		try {
-			parking.SaveLevel(filename, presentLevel);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		parking.SaveLevel(filename, presentLevel);
 	}
 
 	public void LoadCurrentLevel(String filename) throws ParkingOccupiedPlaceException, IOException {
-		try {
-			parking.LoadLevel(filename);
-		} 
-		catch (ParkingOccupiedPlaceException ex) {
-			throw ex;			
-		} 
-		catch (IOException ex) {
-			throw ex;
-		}
+		parking.LoadLevel(filename);
 	}
 }
