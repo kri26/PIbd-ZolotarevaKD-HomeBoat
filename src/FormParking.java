@@ -334,7 +334,5 @@ public class FormParking {
 		});
 		buttonGetConfigs.setBounds(970, 265, 126, 29);
 		frame.getContentPane().add(buttonGetConfigs);
-		
-
 	}
 }
